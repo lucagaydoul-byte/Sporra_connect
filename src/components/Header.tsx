@@ -93,164 +93,165 @@ const Header = () => {
   }, [lastScrollY]);
 
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 z-50 transform transition-transform duration-300 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <a href="/" className="text-2xl font-bold text-white hover:text-orange-500 transition-colors duration-200">
-               <span className="text-orange-500">Sporra</span>
-            </a>
-          </div>
+  return ( // Geändert: Rückgabe in ein React Fragment (<>...</>) geändert
+    <> 
+      <header
+        className={`fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 z-50 transform transition-transform duration-300 ${
+          hidden ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <a href="/" className="text-2xl font-bold text-white hover:text-orange-500 transition-colors duration-200">
+                <span className="text-orange-500">Sporra</span>
+              </a>
+            </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a
-              href="/offers"
-              className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
-            >
-              Kategorien
-            </a>
-            <a
-              href="/offers"
-              className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
-            >
-              Anbieter
-            </a>
-            <a
-              href="/help-center"
-              className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
-            >
-              Hilfe
-            </a>
-          </nav>
-
-          {/* User Section */}
-          <div className="hidden md:flex items-center space-x-4">
-            {user ? (
-              <div className="flex items-center space-x-4 relative">
-                <NotificationSystem />
-                <button
-                  onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
-                >
-                  <User className="w-5 h-5 text-gray-300" />
-                  <span className="text-gray-300">{user.name}</span>
-                </button>
-                
-                {/* User Dropdown */}
-                {showUserDropdown && (
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl z-50">
-                    <div className="py-2">
-                      <button
-                        onClick={() => {
-                          navigate('/profile');
-                          setShowUserDropdown(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2"
-                      >
-                        <Settings className="w-4 h-4" />
-                        Profil & Einstellungen
-                      </button>
-                      <button
-                        onClick={() => {
-                          navigate('/cancellation');
-                          setShowUserDropdown(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2"
-                      >
-                        <Calendar className="w-4 h-4" />
-                        Meine Buchungen
-                      </button>
-                      <hr className="border-gray-700 my-1" />
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-red-400 transition-colors duration-200 flex items-center gap-2"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Abmelden
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
-              >
-                Anmelden
-              </button>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-300 hover:text-white transition-colors duration-200"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-800/95 rounded-lg mt-2 border border-gray-700">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
               <a
                 href="/offers"
-                className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
               >
                 Kategorien
               </a>
               <a
                 href="/offers"
-                className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
               >
                 Anbieter
               </a>
               <a
                 href="/help-center"
-                className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
               >
                 Hilfe
               </a>
-              
+            </nav>
+
+            {/* User Section */}
+            <div className="hidden md:flex items-center space-x-4">
               {user ? (
-                <div className="border-t border-gray-700 pt-2 mt-2">
-                  <div className="px-3 py-2 text-gray-300">
-                    Angemeldet als: {user.name}
-                  </div>
+                <div className="flex items-center space-x-4 relative">
+                  <NotificationSystem />
                   <button
-                    onClick={handleLogout}
-                    className="block w-full text-left px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                    onClick={() => setShowUserDropdown(!showUserDropdown)}
+                    className="flex items-center space-x-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
                   >
-                    Abmelden
+                    <User className="w-5 h-5 text-gray-300" />
+                    <span className="text-gray-300">{user.name}</span>
                   </button>
+                  
+                  {/* User Dropdown */}
+                  {showUserDropdown && (
+                    <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl z-50">
+                      <div className="py-2">
+                        <button
+                          onClick={() => {
+                            navigate('/profile');
+                            setShowUserDropdown(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2"
+                        >
+                          <Settings className="w-4 h-4" />
+                          Profil & Einstellungen
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate('/cancellation');
+                            setShowUserDropdown(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2"
+                        >
+                          <Calendar className="w-4 h-4" />
+                          Meine Buchungen
+                        </button>
+                        <hr className="border-gray-700 my-1" />
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-red-400 transition-colors duration-200 flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Abmelden
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
-                  className="w-full mt-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
                 >
                   Anmelden
                 </button>
               )}
             </div>
-          </div>
-        )}
-      </div>
 
-      {/* Login Modal */}
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-800/95 rounded-lg mt-2 border border-gray-700">
+                <a
+                  href="/offers"
+                  className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                >
+                  Kategorien
+                </a>
+                <a
+                  href="/offers"
+                  className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                >
+                  Anbieter
+                </a>
+                <a
+                  href="/help-center"
+                  className="block px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                >
+                  Hilfe
+                </a>
+                
+                {user ? (
+                  <div className="border-t border-gray-700 pt-2 mt-2">
+                    <div className="px-3 py-2 text-gray-300">
+                      Angemeldet als: {user.name}
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-3 py-2 text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                    >
+                      Abmelden
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setIsLoginModalOpen(true)}
+                    className="w-full mt-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
+                  >
+                    Anmelden
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Login Modal (Jetzt außerhalb des <header>-Tags) */}
       {isLoginModalOpen && (
-        // Korrektur: items-start, py-10 und overflow-y-auto hinzugefügt
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center p-4 py-10 overflow-y-auto">
           <div className="bg-gray-800 rounded-2xl border border-gray-700 w-full max-w-md">
             {/* Header */}
@@ -295,7 +296,7 @@ const Header = () => {
                     type="email"
                     placeholder="E-Mail-Adresse"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData.email, email: e.target.value })}
                     className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     required
                   />
@@ -354,7 +355,7 @@ const Header = () => {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };
 
