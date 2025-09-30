@@ -250,7 +250,8 @@ const Header = () => {
 
       {/* Login Modal */}
       {isLoginModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        // Korrektur: items-start, py-10 und overflow-y-auto hinzugefügt
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center p-4 py-10 overflow-y-auto">
           <div className="bg-gray-800 rounded-2xl border border-gray-700 w-full max-w-md">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-700">
