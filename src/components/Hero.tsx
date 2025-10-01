@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Search, MapPin } from 'lucide-react';
+import { Search, MapPin, Filter, X } from 'lucide-react'; // Geändert: Filter und X importiert
 import { useNavigate } from 'react-router-dom';
+import AdvancedSearch from './AdvancedSearch'; // Hinzugefügt: AdvancedSearch importiert
 
 const Hero = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState('');
   const [district, setDistrict] = useState('');
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false); // Hinzugefügt: Zustand für erweiterte Suche
   const navigate = useNavigate();
 
   const categories = [
@@ -23,6 +25,15 @@ const Hero = () => {
 
     // Weiterleiten auf SearchResults
     navigate(`/search?${params.toString()}`);
+  };
+
+  const handleAdvancedResults = (results: any[]) => {
+    // Wenn Advanced Search Ergebnisse liefert, leiten wir zur SearchResults Seite weiter.
+    // Da die Ergebnisse komplex sein können, übergeben wir die Filter über State/Query-Params (hier Query-Params als Demo)
+    setShowAdvancedSearch(false);
+    navigate(`/search?term=${searchTerm}&advanced=true`); 
+    // Idealerweise würde die AdvancedSearch Logik direkt hier die Filter an SearchResults übergeben
+    // oder die Ergebnisse direkt anzeigen.
   };
 
   return (
@@ -86,6 +97,18 @@ const Hero = () => {
                   Suchen
                 </button>
               </div>
+              
+              {/* Neuer Button für erweiterte Suche */}
+              <div className="mt-4 text-left">
+                <button
+                  type="button"
+                  onClick={() => setShowAdvancedSearch(true)}
+                  className="flex items-center text-orange-500 hover:text-orange-400 text-sm font-medium transition-colors duration-200"
+                >
+                  <Filter className="w-4 h-4 mr-1" />
+                  Erweiterte Filter
+                </button>
+              </div>
             </div>
           </form>
 
@@ -123,6 +146,18 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+      {/* Modal für erweiterte Suche */}
+      {showAdvancedSearch && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4 py-10 overflow-y-auto">
+          <div className="w-full max-w-lg">
+            <AdvancedSearch
+              onResults={handleAdvancedResults}
+              onClose={() => setShowAdvancedSearch(false)}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
