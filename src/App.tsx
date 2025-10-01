@@ -6,6 +6,7 @@ import {
   useNavigate,
   useParams,
   useLocation,
+  ScrollRestoration, // Hinzugefügt: ScrollRestoration importiert
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -95,6 +96,7 @@ const App: React.FC = () => {
       <NotificationProvider>
       <div className="min-h-screen bg-gray-900 text-white">
         <Router>
+          <ScrollRestoration /> {/* Hinzugefügt: Stellt Scrollposition wieder her */}
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
